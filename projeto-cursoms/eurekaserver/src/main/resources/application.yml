@@ -1,0 +1,15 @@
+# Defini o nome da aplicacao. Porque la dentro do euraka server a comunicacao serar feita pelo o nome
+spring:
+  application:
+    name:  eurekaserver
+
+# Define a porta de servico
+server:
+  port: 8761
+
+# Para o eureka nao dar auto Registro ( nao se register-with-eureka: false)
+eureka:
+  client:
+    register-with-eureka: false
+    # quero buscar o registro? nao <- quem vai fazer isso e o gateway
+    fetch-registry: false
