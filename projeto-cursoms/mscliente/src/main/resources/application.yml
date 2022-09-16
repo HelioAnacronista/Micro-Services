@@ -1,0 +1,16 @@
+
+spring:
+  application:
+    name: msclientes
+
+server:
+  port: 0
+
+#conectar no servidor eureka (config de client)
+eureka:
+  client:
+    service-url:
+      defaltZone: http://localhost:8761/eureka
+  # config para instacia
+  instance:
+    instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
