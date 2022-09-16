@@ -4,10 +4,7 @@ import io.github.helioanacronista.mscliente.application.representation.ClienteSa
 import io.github.helioanacronista.mscliente.domain.Cliente;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
@@ -40,5 +37,15 @@ public class ClientesController {
                 .toUri();
 
         return ResponseEntity.created(headerLocation).build();
+    }
+
+    //Buscar pelo cpf e verifica se existe
+    @GetMapping(params = "cpf")
+    public ResponseEntity dadosCliente(@RequestParam("cpf") String cpf){
+        var cliente = service.getByCPF(cpf);
+        if(cliente.isEmpty()){
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(cliente);
     }
 }
