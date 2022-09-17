@@ -7,6 +7,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.ws.rs.core.Response;
+import java.util.List;
+
 @RestController
 @RequestMapping("cartoes")
 @RequiredArgsConstructor
@@ -26,5 +29,10 @@ public class cartoesController {
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
-
+    ///cartoes?renda=5000, ele vai cair aqui. se nao cair no getStatus.
+    @GetMapping(params = "renda")
+    public ResponseEntity<List<Cartao>> getCartoesRendaAteh (@RequestParam("renda") Long renda) {
+        List<Cartao> list = service.getCartoesRendaMenorIgaul(renda);
+        return ResponseEntity.ok(list);
+    }
 }
